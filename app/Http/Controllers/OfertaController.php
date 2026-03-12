@@ -40,9 +40,9 @@ class OfertaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Oferta $oferta)
+   public function show(Oferta $oferta)
     {
-        //
+        return view('ofertas.show')->with(['offer' => $oferta]);
     }
 
     /**
