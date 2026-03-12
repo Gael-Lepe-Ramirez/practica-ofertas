@@ -10,6 +10,11 @@
     </style>
 </head>
 <body>
+    @if(session('success'))
+        <div style="padding: 15px; background-color: #d4edda; color: #155724; width: 390px; margin: 20px auto; border: 1px solid #c3e6cb;">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card">
         <h1>{{ $offer->titulo }}</h1>
         <p><strong>Tienda:</strong> {{ $offer->tienda }}</p>

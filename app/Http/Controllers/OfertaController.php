@@ -14,9 +14,6 @@ class OfertaController extends Controller
     return view('ofertas.index', compact('ofertas'));
 }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('ofertas.create');
@@ -37,9 +34,6 @@ class OfertaController extends Controller
         return redirect()->route('ofertas.index')->with('success', '¡Oferta creada exitosamente!');
     }
 
-    /**
-     * Display the specified resource.
-     */
    public function show(Oferta $oferta)
     {
         return view('ofertas.show')->with(['offer' => $oferta]);
@@ -52,7 +46,6 @@ class OfertaController extends Controller
 
     public function update(Request $request, Oferta $oferta)
     {
-        // Reutilizamos las mismas validaciones fuertes
         $request->validate([
             'titulo' => 'required|min:3',
             'vigencia' => 'required|date|after:today',
