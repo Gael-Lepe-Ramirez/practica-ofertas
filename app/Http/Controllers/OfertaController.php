@@ -45,27 +45,30 @@ class OfertaController extends Controller
         return view('ofertas.show')->with(['offer' => $oferta]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Oferta $oferta)
     {
-        //
+        return view('ofertas.edit', compact('oferta'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Oferta $oferta)
     {
-        //
+        // Reutilizamos las mismas validaciones fuertes
+        $request->validate([
+            'titulo' => 'required|min:3',
+            'vigencia' => 'required|date|after:today',
+            'tienda' => 'required',
+            'precio_original' => 'required|numeric|min:0',
+            'precio_descuento' => 'required|numeric|lt:precio_original',
+        ]);
+
+        $oferta->update($request->all());
+
+        return redirect()->route('ofertas.show', $oferta)->with('success', 'Oferta actualizada correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Oferta $oferta)
     {
-        //
+        $oferta->delete();
+        return redirect()->route('ofertas.index')->with('success', 'Oferta eliminada correctamente');
     }
 }

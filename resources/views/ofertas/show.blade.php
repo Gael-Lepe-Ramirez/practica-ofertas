@@ -19,7 +19,15 @@
         <p class="precio-new">¡Oferta!: ${{ number_format($offer->precio_descuento, 2) }}</p>
         
         <br>
-        <a href="{{ route('ofertas.index') }}">Volver a la lista</a>
+        <p>
+            <a href="{{ route('ofertas.index') }}">Volver a la lista</a> | 
+            <a href="{{ route('ofertas.edit', $offer) }}">Editar Oferta</a>
+        </p>
+        <form action="{{ route('ofertas.destroy', $offer) }}" method="POST" style="margin-top: 10px;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" style="color: white; background-color: red; padding: 5px 10px; border: none; cursor: pointer;">Eliminar Oferta</button>
+        </form>
     </div>
 </body>
 </html>
