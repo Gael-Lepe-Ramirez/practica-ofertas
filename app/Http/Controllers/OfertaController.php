@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 
 class OfertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-        //
-    }
+{
+    $ofertas = Oferta::all();
+    
+    return view('ofertas.index', compact('ofertas'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +32,9 @@ class OfertaController extends Controller
             'precio_descuento' => 'required|numeric|lt:precio_original',
         ]);
 
-        \App\Models\Oferta::create($request->all());
+        Oferta::create($request->all());
 
-        return redirect()->route('ofertas.index');
+        return redirect()->route('ofertas.index')->with('success', '¡Oferta creada exitosamente!');
     }
 
     /**
