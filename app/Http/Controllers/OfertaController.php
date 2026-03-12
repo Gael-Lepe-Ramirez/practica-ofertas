@@ -20,15 +20,22 @@ class OfertaController extends Controller
      */
     public function create()
     {
-        //
+        return view('ofertas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|min:3',
+            'vigencia' => 'required|date|after:today',
+            'tienda' => 'required',
+            'precio_original' => 'required|numeric|min:0',
+            'precio_descuento' => 'required|numeric|lt:precio_original',
+        ]);
+
+        \App\Models\Oferta::create($request->all());
+
+        return redirect()->route('ofertas.index');
     }
 
     /**
